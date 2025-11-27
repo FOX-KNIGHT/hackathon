@@ -1,108 +1,63 @@
-# Deploying UniXplore to Vercel
+# Deploying to GitHub Pages
 
-## Prerequisites
-- GitHub repository with your code pushed
-- Vercel account (free): https://vercel.com/signup
+## ⚠️ Important Limitations
 
-## Step 1: Create Production Database
+GitHub Pages only supports **static HTML/CSS/JavaScript**. Your UniXplore app will have these limitations:
 
-Choose one of these options:
+- ❌ **No Authentication** - Login/Register won't work
+- ❌ **No Database** - Cannot connect to PostgreSQL
+- ❌ **No API Routes** - All `/api/*` endpoints will fail
+- ❌ **No Admin Features** - Cannot edit colleges/clubs
+- ✅ **Public Browsing Only** - Can view static college/club pages
 
-### Option A: Vercel Postgres (Recommended)
-1. Go to https://vercel.com/dashboard
-2. Click "Storage" → "Create Database" → "Postgres"
-3. Copy the connection string
+## Deployment Steps
 
-### Option B: Supabase (Free tier)
-1. Go to https://supabase.com/
-2. Create new project
-3. Go to Settings → Database → Connection string
-4. Copy the connection string
+### 1. Push Changes to GitHub
 
-### Option C: Neon (Free tier)
-1. Go to https://neon.tech/
-2. Create new project
-3. Copy the connection string
+All configuration is ready. The changes will be committed and pushed automatically.
 
-## Step 2: Deploy to Vercel
+### 2. Enable GitHub Pages
 
-### Via Vercel Dashboard (Easiest)
-1. Go to https://vercel.com/new
-2. Import your GitHub repository: `FOX-KNIGHT/hack`
-3. Configure project:
-   - **Root Directory**: `unixplore`
-   - **Framework Preset**: Next.js
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `.next`
+1. Go to your repository: https://github.com/FOX-KNIGHT/hack
+2. Click **Settings** → **Pages**
+3. Under "Build and deployment":
+   - **Source**: Select "GitHub Actions"
+4. Save the settings
 
-4. Add Environment Variables:
-   ```
-   DATABASE_URL=<your-postgres-connection-string>
-   JWT_SECRET=<generate-a-random-32-char-string>
-   NEXT_PUBLIC_APP_URL=<will-be-provided-after-deployment>
-   ```
+### 3. Automatic Deployment
 
-5. Click "Deploy"
+The GitHub Actions workflow will automatically:
+- Build your Next.js app as static HTML
+- Deploy to GitHub Pages
+- Your site will be available at: `https://fox-knight.github.io/hack/`
 
-### Via Vercel CLI (Alternative)
-```bash
-# Install Vercel CLI
-npm i -g vercel
+### 4. Monitor Deployment
 
-# Navigate to project
-cd d:\REDIVA\hack\unixplore
+1. Go to **Actions** tab in your repository
+2. Watch the "Deploy to GitHub Pages" workflow
+3. Once complete (green checkmark), visit your site
 
-# Login to Vercel
-vercel login
+## What Works
 
-# Deploy
-vercel --prod
-```
+- ✅ Home page
+- ✅ Browse colleges (static list)
+- ✅ Browse clubs (static list)
+- ✅ View college/club details (if pre-generated)
 
-## Step 3: Post-Deployment Setup
+## What Doesn't Work
 
-1. **Get your deployment URL** (e.g., `https://hack-fox-knight.vercel.app`)
-2. **Update environment variable**:
-   - Go to Vercel Dashboard → Your Project → Settings → Environment Variables
-   - Update `NEXT_PUBLIC_APP_URL` with your deployment URL
-   - Redeploy the project
+- ❌ User registration/login
+- ❌ Admin dashboard
+- ❌ Dynamic data from database
+- ❌ Search functionality (if it uses API)
+- ❌ Any form submissions
 
-3. **Initialize Database** (if using Prisma):
-   ```bash
-   # Set DATABASE_URL locally to production database
-   npx prisma db push
-   npx prisma db seed
-   ```
+## Alternative: Full-Featured Deployment
 
-## Step 4: Verify Deployment
+If you need all features (auth, database, admin), you must use a platform that supports server-side code:
+- **Vercel** (recommended for Next.js)
+- **Railway**
+- **Render**
+- **Netlify** (with serverless functions)
 
-Visit your deployment URL and test:
-- ✅ Home page loads
-- ✅ Browse colleges and clubs
-- ✅ Registration works
-- ✅ Login works
-- ✅ Admin features work
-
-## Automatic Deployments
-
-Every push to the `main` branch will automatically trigger a new deployment on Vercel.
-
-## Troubleshooting
-
-### Build Fails
-- Check build logs in Vercel dashboard
-- Ensure all environment variables are set
-- Verify database connection string is correct
-
-### Database Connection Issues
-- Verify DATABASE_URL is correct
-- Check if database allows connections from Vercel IPs
-- For Supabase/Neon, ensure connection pooling is enabled
-
-### 404 Errors
-- Ensure Root Directory is set to `unixplore`
-- Check that all routes are properly defined
-
-## Support
-- Vercel Docs: https://vercel.com/docs
-- Vercel Support: https://vercel.com/support
+These platforms are free and provide the full functionality of your app.
