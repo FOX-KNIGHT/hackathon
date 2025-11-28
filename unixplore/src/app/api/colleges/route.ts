@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
         c.city,
         c.state,
         c.official_website,
-        COUNT(cl.id) as club_count
+        COUNT(cl.id)::int as club_count
       FROM colleges c
       LEFT JOIN clubs cl ON c.id = cl.college_id AND cl.status = 'approved'
       WHERE c.status = 'active'
