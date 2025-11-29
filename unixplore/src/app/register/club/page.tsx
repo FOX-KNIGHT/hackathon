@@ -96,7 +96,7 @@ export default function ClubRegistrationPage() {
                                 <div className="bg-muted p-4 rounded-lg mb-6">
                                     <p className="text-sm">
                                         Your registration is pending approval from the college admin.
-                                        You'll be able to access your dashboard once approved.
+                                        You&apos;ll be able to access your dashboard once approved.
                                     </p>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@ export default function ClubRegistrationPage() {
                                         placeholder="CLG-XXXXXX or College Name"
                                     />
                                     <p className="text-xs text-muted-foreground mt-1">
-                                        Enter your college's ID (e.g., CLG-100001) or search by name
+                                        Enter your college&apos;s ID (e.g., CLG-100001) or search by name
                                     </p>
                                 </div>
 

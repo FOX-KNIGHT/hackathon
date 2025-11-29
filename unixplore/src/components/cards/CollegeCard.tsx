@@ -1,7 +1,9 @@
+'use client';
+
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { motion } from 'framer-motion';
+import { MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { MapPin, ExternalLink } from 'lucide-react';
 
 interface CollegeCardProps {
     id: number;
@@ -13,36 +15,44 @@ interface CollegeCardProps {
 
 export function CollegeCard({ id, collegeId, name, location, clubCount }: CollegeCardProps) {
     return (
-        <Card className="card-hover h-full">
-            <CardHeader>
-                <div className="flex items-start justify-between gap-2">
-                    <div className="flex-1 min-w-0">
-                        <CardTitle className="text-xl line-clamp-2">{name}</CardTitle>
-                        <CardDescription className="mt-2 flex items-center gap-1">
-                            <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
-                            <span className="line-clamp-1">{location}</span>
-                        </CardDescription>
+        <motion.div
+            whileHover={{ y: -5 }}
+            className="group relative h-full rounded-2xl bg-white/5 border border-white/10 overflow-hidden backdrop-blur-sm transition-colors hover:bg-white/10"
+        >
+            <div className="p-6 flex flex-col h-full">
+                <div className="flex justify-between items-start mb-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-white/10">
+                        <span className="text-2xl font-bold text-white">
+                            {name.charAt(0)}
+                        </span>
                     </div>
+                    {clubCount !== undefined && (
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-gray-400">
+                            {clubCount} Clubs
+                        </span>
+                    )}
                 </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">College ID:</span>
-                    <code className="px-2 py-1 bg-muted rounded text-xs font-mono">{collegeId}</code>
+
+                <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-400 transition-colors">
+                    {name}
+                </h3>
+
+                <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
+                    <MapPin className="h-4 w-4" />
+                    <span className="line-clamp-1">{location}</span>
                 </div>
-                {clubCount !== undefined && (
-                    <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Clubs:</span>
-                        <span className="font-semibold">{clubCount}</span>
-                    </div>
-                )}
-                <Link href={`/colleges/${id}`} className="block">
-                    <Button className="w-full" variant="default">
-                        View College
-                        <ExternalLink className="ml-2 h-4 w-4" />
-                    </Button>
-                </Link>
-            </CardContent>
-        </Card>
+
+                <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                    <code className="text-xs font-mono text-gray-500 bg-black/20 px-2 py-1 rounded">
+                        {collegeId}
+                    </code>
+                    <Link href={`/college/${collegeId}`}>
+                        <Button size="sm" variant="ghost" className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 p-0 h-auto font-normal">
+                            Explore <ArrowRight className="ml-1 h-3 w-3" />
+                        </Button>
+                    </Link>
+                </div>
+            </div>
+        </motion.div>
     );
 }

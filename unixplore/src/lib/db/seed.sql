@@ -1,10 +1,10 @@
 -- Seed data for UniXplore
--- This includes SOA/ITER college and all its clubs
+-- This includes SOA/ITER college and Silicon Institute of Technology
 
 -- Insert SOA University
 INSERT INTO colleges (college_id, name, location, city, state, official_website, official_email, status)
 VALUES (
-  'CLG-100001',
+  'CLG-SOAITER',
   'Siksha ''O'' Anusandhan (SOA) - Institute of Technical Education and Research (ITER)',
   'Bhubaneswar, Odisha',
   'Bhubaneswar',
@@ -14,11 +14,32 @@ VALUES (
   'active'
 );
 
+-- Insert Silicon Institute of Technology
+INSERT INTO colleges (college_id, name, location, city, state, official_website, official_email, status)
+VALUES (
+  'CLG-SILICON',
+  'Silicon Institute of Technology',
+  'Bhubaneswar, Odisha',
+  'Bhubaneswar',
+  'Odisha',
+  'https://silicon.ac.in',
+  'info@silicon.ac.in',
+  'active'
+);
+
 -- Insert college admin for SOA (password: Admin@123)
 INSERT INTO college_admins (college_id, email, password_hash)
 VALUES (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'admin@soa.ac.in',
+  '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYILNv.3npu'
+);
+
+-- Insert college admin for Silicon (password: Admin@123)
+INSERT INTO college_admins (college_id, email, password_hash)
+VALUES (
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SILICON'),
+  'admin@silicon.ac.in',
   '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYILNv.3npu'
 );
 
@@ -28,7 +49,7 @@ VALUES (
 INSERT INTO clubs (college_id, name, slug, category_id, email, description, about, status)
 VALUES
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'Google Developer Group (GDG) - ITER Chapter',
   'gdg-iter',
   (SELECT id FROM categories WHERE slug = 'technical'),
@@ -38,7 +59,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'CODEX',
   'codex',
   (SELECT id FROM categories WHERE slug = 'technical'),
@@ -48,7 +69,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'Coding Ninjas 10x Club (CN10x)',
   'cn10x',
   (SELECT id FROM categories WHERE slug = 'technical'),
@@ -58,7 +79,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'Innovation & Entrepreneurship Cell (E-Cell SOA)',
   'ecell-soa',
   (SELECT id FROM categories WHERE slug = 'technical'),
@@ -68,7 +89,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'ITER Robotics Club (IRC)',
   'irc',
   (SELECT id FROM categories WHERE slug = 'technical'),
@@ -78,7 +99,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Flying Community (SFC)',
   'sfc',
   (SELECT id FROM categories WHERE slug = 'technical'),
@@ -92,7 +113,7 @@ VALUES
 INSERT INTO clubs (college_id, name, slug, category_id, email, description, about, status)
 VALUES
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Danza',
   'soa-danza',
   (SELECT id FROM categories WHERE slug = 'cultural'),
@@ -102,7 +123,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'Vogue',
   'vogue',
   (SELECT id FROM categories WHERE slug = 'cultural'),
@@ -112,7 +133,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'ODANZA',
   'odanza',
   (SELECT id FROM categories WHERE slug = 'cultural'),
@@ -122,7 +143,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'Toneelstuk (TSK)',
   'toneelstuk',
   (SELECT id FROM categories WHERE slug = 'cultural'),
@@ -132,7 +153,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Music Club (SMC)',
   'smc',
   (SELECT id FROM categories WHERE slug = 'cultural'),
@@ -142,7 +163,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'Srishti',
   'srishti',
   (SELECT id FROM categories WHERE slug = 'cultural'),
@@ -156,7 +177,7 @@ VALUES
 INSERT INTO clubs (college_id, name, slug, category_id, email, description, about, status)
 VALUES
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Photography Club (SPC)',
   'spc',
   (SELECT id FROM categories WHERE slug = 'media'),
@@ -166,7 +187,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'Virtual Showreel (VSR)',
   'vsr',
   (SELECT id FROM categories WHERE slug = 'media'),
@@ -180,7 +201,7 @@ VALUES
 INSERT INTO clubs (college_id, name, slug, category_id, email, description, about, status)
 VALUES
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'JAAGO',
   'jaago',
   (SELECT id FROM categories WHERE slug = 'social'),
@@ -190,7 +211,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'National Cadet Corps (NCC) SOA',
   'ncc-soa',
   (SELECT id FROM categories WHERE slug = 'social'),
@@ -204,7 +225,7 @@ VALUES
 INSERT INTO clubs (college_id, name, slug, category_id, email, description, about, status)
 VALUES
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Badminton Club',
   'badminton',
   (SELECT id FROM categories WHERE slug = 'sports'),
@@ -214,7 +235,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Basketball Club',
   'basketball',
   (SELECT id FROM categories WHERE slug = 'sports'),
@@ -224,7 +245,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Football Club',
   'football',
   (SELECT id FROM categories WHERE slug = 'sports'),
@@ -234,7 +255,7 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Table Tennis Club',
   'table-tennis',
   (SELECT id FROM categories WHERE slug = 'sports'),
@@ -244,13 +265,47 @@ VALUES
   'approved'
 ),
 (
-  (SELECT id FROM colleges WHERE college_id = 'CLG-100001'),
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SOAITER'),
   'SOA Cricket Club',
   'cricket',
   (SELECT id FROM categories WHERE slug = 'sports'),
   'cricket@soa.ac.in',
   'A powerhouse for cricket lovers, nurturing batting, bowling, and fielding talent.',
   'A powerhouse for cricket lovers, the club nurtures batting, bowling, and fielding talent while preparing teams for major tournaments and campus leagues. The SOA Cricket Club is part of the central sports hub on campus.',
+  'approved'
+);
+
+-- Insert Silicon Clubs
+INSERT INTO clubs (college_id, name, slug, category_id, email, description, about, status)
+VALUES
+(
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SILICON'),
+  'Silicon Tech Club',
+  'silicon-tech',
+  (SELECT id FROM categories WHERE slug = 'technical'),
+  'tech@silicon.ac.in',
+  'The official technical club of Silicon Institute of Technology.',
+  'Fostering innovation and technical skills among students through workshops and hackathons.',
+  'approved'
+),
+(
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SILICON'),
+  'Silicon Cultural Club',
+  'silicon-cultural',
+  (SELECT id FROM categories WHERE slug = 'cultural'),
+  'cultural@silicon.ac.in',
+  'Celebrating the diverse culture and artistic talents of Silicon students.',
+  'Organizing cultural events, dance competitions, and music fests.',
+  'approved'
+),
+(
+  (SELECT id FROM colleges WHERE college_id = 'CLG-SILICON'),
+  'Silicon Sports Club',
+  'silicon-sports',
+  (SELECT id FROM categories WHERE slug = 'sports'),
+  'sports@silicon.ac.in',
+  'Promoting sportsmanship and fitness through various sports activities.',
+  'Managing all sports events and teams at Silicon Institute of Technology.',
   'approved'
 );
 
@@ -261,8 +316,7 @@ SELECT
   'Admin',
   email,
   '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYILNv.3npu'
-FROM clubs
-WHERE college_id = (SELECT id FROM colleges WHERE college_id = 'CLG-100001');
+FROM clubs;
 
 -- Add sample announcements for a few clubs
 INSERT INTO announcements (club_id, title, content, published)
@@ -285,3 +339,4 @@ VALUES
   '<p>SOA Danza is conducting auditions for new members! If you have a passion for dance and want to be part of our award-winning team, this is your chance.</p><p>Date: TBA<br>Venue: Main Auditorium</p>',
   true
 );
+

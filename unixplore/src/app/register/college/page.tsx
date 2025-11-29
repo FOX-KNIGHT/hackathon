@@ -72,7 +72,7 @@ export default function CollegeRegistrationPage() {
                                     <p className="text-sm text-muted-foreground mb-2">Your College ID:</p>
                                     <code className="text-2xl font-mono font-bold">{collegeId}</code>
                                     <p className="text-xs text-muted-foreground mt-2">
-                                        Save this ID - you'll need it for future reference
+                                        Save this ID - you&apos;ll need it for future reference
                                     </p>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@ export default function CollegeRegistrationPage() {
                                         required
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        placeholder="e.g., Siksha 'O' Anusandhan University"
+                                        placeholder="e.g., Siksha &apos;O&apos; Anusandhan University"
                                     />
                                 </div>
 

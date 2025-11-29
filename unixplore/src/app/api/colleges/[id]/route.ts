@@ -7,18 +7,8 @@ export async function GET(
     { params }: { params: { id: string } }
 ) {
     try {
-        const collegeId = parseInt(params.id);
-
-        if (isNaN(collegeId)) {
-            return NextResponse.json(
-                { success: false, error: 'Invalid college ID' },
-                { status: 400 }
-            );
-        }
-
-        // Get college details
-        const collegeResult = await query(
-            `SELECT 
+        console.log('API Request for College ID:', params.id);
+        let queryText = `SELECT 
         id,
         college_id,
         name,
@@ -29,9 +19,27 @@ export async function GET(
         official_email,
         created_at
       FROM colleges
-      WHERE id = $1 AND status = 'active'`,
-            [collegeId]
-        );
+      WHERE status = 'active' AND `;
+
+        const queryParams = [];
+
+        if (params.id.startsWith('CLG-')) {
+            queryText += `college_id = $1`;
+            queryParams.push(params.id);
+        } else {
+            const id = parseInt(params.id);
+            if (isNaN(id)) {
+                return NextResponse.json(
+                    { success: false, error: 'Invalid college ID' },
+                    { status: 400 }
+                );
+            }
+            queryText += `id = $1`;
+            queryParams.push(id);
+        }
+
+        // Get college details
+        const collegeResult = await query(queryText, queryParams);
 
         if (collegeResult.rows.length === 0) {
             return NextResponse.json(
@@ -56,12 +64,12 @@ export async function GET(
       JOIN categories cat ON cl.category_id = cat.id
       WHERE cl.college_id = $1 AND cl.status = 'approved'
       ORDER BY cl.name ASC`,
-            [collegeId]
+            [college.id]
         );
 
         // Track view
-        await incrementViews('colleges', collegeId);
-        await trackEvent('college', collegeId, 'view');
+        await incrementViews('colleges', college.id);
+        await trackEvent('college', college.id, 'view');
 
         return NextResponse.json({
             success: true,
